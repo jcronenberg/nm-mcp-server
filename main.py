@@ -9,7 +9,13 @@ from typing import Optional
 from mcp.server.fastmcp import FastMCP, Context
 from mcp.types import PingRequest, EmptyResult
 
-mcp = FastMCP("NetworkManager MCP Server", host="0.0.0.0", port=8000, stateless_http=True, json_response=True)
+mcp = FastMCP(
+    "NetworkManager MCP Server",
+    host=os.getenv("MCP_HOST", "0.0.0.0"),
+    port=int(os.getenv("MCP_PORT", "8000")),
+    stateless_http=True,
+    json_response=True
+)
 
 DEVICE_TYPES = {
     0: "Unknown", 1: "Ethernet", 2: "Wi-Fi", 5: "Bluetooth", 6: "OLPC",
